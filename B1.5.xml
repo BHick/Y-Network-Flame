@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="FLAMEGPU_vcproj.xslt"?>
+<gpu:xmodel xmlns:gpu="http://www.dcs.shef.ac.uk/~paul/XMMLGPU"
+        xmlns="http://www.dcs.shef.ac.uk/~paul/XMML">
+	<name>B4.1</name>
+	<gpu:environment>
+		<gpu:functionFiles>
+			<file>functions.c</file>
+		</gpu:functionFiles>
+	</gpu:environment>
+
+	<xagents>
+		<gpu:xagent>
+			<name>junction</name>
+			<description>start of a track segment</description> 
+			<memory>
+				<gpu:variable>
+					<type>int</type> 
+					<name>id</name>
+				</gpu:variable>
+				<gpu:variable>
+					<type>float</type>
+					<name>x</name>
+				</gpu:variable>
+				<gpu:variable>
+					<type>float</type>
+					<name>y</name>
+				</gpu:variable>
+				<gpu:variable>
+					<type>float</type>
+					<name>xChange</name>
+				</gpu:variable>
+				<gpu:variable>
+					<type>float</type>
+					<name>yChange</name>
+				</gpu:variable>
+				<gpu:variable>
+					<type>int</type>
+					<name>occupation</name>
+				</gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>line_next_stop</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>line_speed</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>line</name>
+        </gpu:variable>
+			</memory>
+			
+			<states>
+				<gpu:state>
+					<name>default</name>
+				</gpu:state>
+        <initialState>default</initialState>
+			</states>
+			<gpu:type>continuous</gpu:type>
+			<gpu:bufferSize>2048</gpu:bufferSize>
+		</gpu:xagent>
+    
+    <gpu:xagent>
+      <name>train</name>
+      <description> train agent </description>
+      <memory>
+        <gpu:variable>
+          <type>int</type>
+          <name>id</name>
+          <description>train number</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>xPosition</name>
+          <description>x positon of train</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>yPosition</name>
+          <description>y positon of train</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>xVelocity</name>
+          <description>x velocity of train</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>yVelocity</name>
+          <description>y velocity of train</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>capacity</name>
+          <description>capacity of train</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>load</name>
+          <description>number of people on train</description>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>nextStop</name>
+        </gpu:variable>
+      </memory>
+     
+      <functions>
+        <gpu:function>
+          <name>Start</name>
+          <description>start a stopped train</description>
+          <currentState>Stopped</currentState>
+          <nextState>Mooving</nextState>
+          <gpu:reallocate>false</gpu:reallocate>
+          <gpu:RNG>false</gpu:RNG>
+        </gpu:function>
+        <gpu:function>
+          <name>Stop</name>
+          <description>Stop a mooving train </description>
+          <currentState>Mooving</currentState>
+          <nextState>Stopped</nextState>
+          <gpu:reallocate>false</gpu:reallocate>
+          <gpu:RNG>false</gpu:RNG>
+        </gpu:function>
+        <gpu:function>
+          <name>Continue</name>
+          <description>Keep a train mooving at current speed</description>
+          <currentState>Mooving</currentState>
+          <nextState>Mooving</nextState>
+          <gpu:reallocate>false</gpu:reallocate>
+          <gpu:RNG>false</gpu:RNG>
+        </gpu:function>
+        <gpu:function>
+          <name>Wait</name>
+          <description>make train wait</description>
+          <currentState>Stopped</currentState>
+          <nextState>Stopped</nextState>
+          <gpu:reallocate>false</gpu:reallocate>
+          <gpu:RNG>false</gpu:RNG>
+        </gpu:function>
+        
+      </functions>
+      <states>
+        <gpu:state>
+          <name>Stopped></name>
+        </gpu:state>
+        <gpu:state>
+          <name>Mooving</name>
+        </gpu:state>
+        <initialState>Stopped</initialState>
+      </states>
+      <gpu:type>continuous</gpu:type>
+      <gpu:bufferSize>1024</gpu:bufferSize>
+    </gpu:xagent>
+</xagents>
+
+	<messages>
+		<gpu:message>
+			<name>trackLocation</name>
+			<description>a message from junction saying what train;s vector change and maximum speed can be</description>
+      <variables>
+        <gpu:variable>
+          <type>int</type>
+          <name>id</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>xChange</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>yChange</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>occupation</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>line_next_stop</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>float</type>
+          <name>line_speed</name>
+        </gpu:variable>
+        <gpu:variable>
+          <type>int</type>
+          <name>line</name>
+        </gpu:variable>
+      </variables>
+      <gpu:partitioningDiscrete>
+         <gpu:radius>0</gpu:radius>
+      </gpu:partitioningDiscrete>
+			<gpu:bufferSize>2048</gpu:bufferSize>
+		</gpu:message>
+	</messages>
+
+	<layers>
+		<layer>
+			<gpu:layerFunction>
+				<name>Start</name>
+			</gpu:layerFunction>
+      <gpu:layerFunction>
+        <name>Stop</name>
+      </gpu:layerFunction>
+      <gpu:layerFunction>
+        <name>Continue</name>
+      </gpu:layerFunction>
+      <gpu:layerFunction>
+        <name>Wait</name>
+      </gpu:layerFunction>
+		</layer>
+
+	</layers>
+
+</gpu:xmodel>

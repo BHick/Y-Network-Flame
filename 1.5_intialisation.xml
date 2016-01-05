@@ -1,0 +1,82 @@
+﻿<states>
+  <itno>0</itno>
+  <xagent>
+    <name>junction</name>
+    <id>1</id>
+    <x>0</x>
+    <y>0</y>
+    <xChange>100</xChange>
+    <yChange>100</yChange>
+    <occupation>0</occupation>
+    <line_next_stop>1</line_next_stop>
+    <line>1</line>
+    <line_speed>50</line_speed>
+  </xagent>
+<xagent>
+    <name>junction</name>
+    <id>2</id>
+    <x>100</x>
+    <y>100</y>
+    <xChange>-100</xChange>
+    <yChange>-100</yChange>
+    <occupation>0</occupation>
+    <line_next_stop>1</line_next_stop>
+    <line>1</line>
+    <line_speed>50</line_speed>
+  </xagent>
+<xagent>
+    <name>junction</name>
+    <id>3</id>
+    <x>100</x>
+    <y>100</y>
+    <xChange>0</xChange>
+    <yChange>100</yChange>
+    <occupation>0</occupation>
+    <line_next_stop>3</line_next_stop>
+    <line>2</line>
+    <line_speed>50</line_speed>
+  </xagent>
+<xagent>
+    <name>junction</name>
+    <id>4</id>
+    <x>100</x>
+    <y>200</y>
+    <xChange>0</xChange>
+    <yChange>-100</yChange>
+    <occupation>0</occupation>
+    <line_next_stop>2</line_next_stop>
+    <line>2</line>
+    <line_speed>50</line_speed>
+  </xagent>
+<xagent>
+    <name>junction</name>
+    <id>5</id>
+    <x>100</x>
+    <y>100</y>
+    <xChange>100</xChange>
+    <yChange>-100</yChange>
+    <occupation>0</occupation>
+    <line_next_stop>4</line_next_stop>
+    <line>3</line>
+    <line_speed>50</line_speed>
+  </xagent>
+<xagent>
+    <name>junction</name>
+    <id>6</id>
+    <x>200</x>
+    <y>0</y>
+    <xChange>-100</xChange>
+    <yChange>100</yChange>
+    <occupation>0</occupation>
+    <line_next_stop>2</line_next_stop>
+    <line>3</line>
+    <line_speed>50</line_speed>
+  </xagent>
+
+  <xagent>
+    <name>train</name>
+    <id>1</id>
+    <xPosition>0</xPosition>
+    <yPosition>0</yPosition>
+  </xagent>
+</states>
